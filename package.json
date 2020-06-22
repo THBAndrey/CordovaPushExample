@@ -9,7 +9,7 @@
     "cordova-ios": "^5.1.1"
   },
   "devDependencies": {
-    "phonegap-plugin-push": "~1.8.0"
+    "phonegap-plugin-push": "git+https://github.com/phonegap/phonegap-plugin-push.git"
   },
   "cordova": {
     "plugins": {
