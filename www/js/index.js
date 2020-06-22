@@ -43,6 +43,9 @@ var app = {
             "android": {
                 "senderID": "951093526823"
             },
+            "browser": {
+                "pushServiceURL": "https://fcm.googleapis.com/wp/AAAA3XGXgSc:APA91bEXs8OXdbTQeHBccYMPYbErRvhS-BeTwtVtg4V0D3KIIfDedJK-mwSXeGB8CaTkOKn2vRJxERZBn5Nqrvr9LoJmeDrXmtl4XRoVuS3uOnS8U_Q-QsZjXm0_1mXztRv6pTeGxVue"
+            },
             "ios": {
                 "sound": true,
                 "vibration": true,
@@ -71,7 +74,7 @@ var app = {
         });
 
         push.on('error', function (e) {
-            alert("push error = " + e.message);
+            console.log("push error = " + e.message);
         });
 
         push.on('notification', function (data) {
