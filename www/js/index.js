@@ -17,74 +17,73 @@
  * under the License.
  */
 var app = {
-    // Application Constructor
-    initialize: function () {
-        this.bindEvents();
-    },
-    // Bind Event Listeners
-    //
-    // Bind any events that are required on startup. Common events are:
-    // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function () {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicitly call 'app.receivedEvent(...);'
-    onDeviceReady: function () {
-        console.log('Received Device Ready Event');
-        console.log('calling setup push');
-        app.setupPush();
-    },
-    setupPush: function () {
-        console.log('calling push init');
-        var push = PushNotification.init({
-            "android": {
-                "senderID": "951093526823"
-            },
-            "browser": {
-                "pushServiceURL": "https://fcm.googleapis.com/wp/AAAA3XGXgSc:APA91bEXs8OXdbTQeHBccYMPYbErRvhS-BeTwtVtg4V0D3KIIfDedJK-mwSXeGB8CaTkOKn2vRJxERZBn5Nqrvr9LoJmeDrXmtl4XRoVuS3uOnS8U_Q-QsZjXm0_1mXztRv6pTeGxVue"
-            },
-            "ios": {
-                "sound": true,
-                "vibration": true,
-                "badge": true
-            },
-            "windows": {}
-        });
-        console.log('after init');
+  // Application Constructor
+  initialize: function () {
+    this.bindEvents();
+  },
+  // Bind Event Listeners
+  //
+  // Bind any events that are required on startup. Common events are:
+  // 'load', 'deviceready', 'offline', and 'online'.
+  bindEvents: function () {
+    document.addEventListener("deviceready", this.onDeviceReady, false);
+  },
+  // deviceready Event Handler
+  //
+  // The scope of 'this' is the event. In order to call the 'receivedEvent'
+  // function, we must explicitly call 'app.receivedEvent(...);'
+  onDeviceReady: function () {
+    console.log("Received Device Ready Event");
+    console.log("calling setup push");
+    app.setupPush();
+  },
+  setupPush: function () {
+    console.log("calling push init");
+    var push = PushNotification.init({
+      android: {
+        senderID: "974960813753",
+      },
+      ios: {
+        sound: true,
+        vibration: true,
+        badge: true,
+      },
+      windows: {},
+    });
+    console.log("after init");
 
-        push.on('registration', function (data) {
-            navigator.notification.alert('registration event: ' + data.registrationId);
+    push.on("registration", function (data) {
+      navigator.notification.alert(
+        "registration event: " + data.registrationId
+      );
 
-            var oldRegId = localStorage.getItem('registrationId');
-            if (oldRegId !== data.registrationId) {
-                // Save new registration ID
-                localStorage.setItem('registrationId', data.registrationId);
-                // Post registrationId to your app server as the value has changed
-            }
+      var oldRegId = localStorage.getItem("registrationId");
+      if (oldRegId !== data.registrationId) {
+        // Save new registration ID
+        localStorage.setItem("registrationId", data.registrationId);
+        // Post registrationId to your app server as the value has changed
+      }
 
-            var parentElement = document.getElementById('registration');
-            var listeningElement = parentElement.querySelector('.waiting');
-            var receivedElement = parentElement.querySelector('.received');
+      var parentElement = document.getElementById("registration");
+      var listeningElement = parentElement.querySelector(".waiting");
+      var receivedElement = parentElement.querySelector(".received");
 
-            listeningElement.setAttribute('style', 'display:none;');
-            receivedElement.setAttribute('style', 'display:block;');
-        });
+      listeningElement.setAttribute("style", "display:none;");
+      receivedElement.setAttribute("style", "display:block;");
+    });
 
-        push.on('error', function (e) {
-            navigator.notification.alert("push error = " + e.message);
-        });
+    push.on("error", function (e) {
+      navigator.notification.alert("push error = " + e.message);
+    });
 
-        push.on('notification', function (data) {
-            navigator.notification.alert('notification event');
-            navigator.notification.alert(
-                data.message, // message
-                null, // callback
-                data.title, // title
-                'Ok' // buttonName
-            );
-        });
-    }
+    push.on("notification", function (data) {
+      navigator.notification.alert("notification event");
+      navigator.notification.alert(
+        data.message, // message
+        null, // callback
+        data.title, // title
+        "Ok" // buttonName
+      );
+    });
+  },
 };

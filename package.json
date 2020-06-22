@@ -14,7 +14,7 @@
   "cordova": {
     "plugins": {
       "phonegap-plugin-push": {
-        "SENDER_ID": "951093526823"
+        "SENDER_ID": "974960813753"
       }
     },
     "platforms": [
